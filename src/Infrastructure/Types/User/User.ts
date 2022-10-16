@@ -6,3 +6,5 @@ export interface UserInfo {
     isSelected: boolean  
 }
 export type LOGIN_MESSAGE = 'ERROR' | 'INFO' | 'WARNING'
+
+export type LOCALSTORAGE_USER_KEYS = 'USERINFO' | 'USERLIST'
