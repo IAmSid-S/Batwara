@@ -53,6 +53,8 @@ export class UserService implements IUserService {
         if(user === null)
             return false;
 
+        if(user.isPasswordProtected === false) return true;
+        
         return user.password === password;
     }
 

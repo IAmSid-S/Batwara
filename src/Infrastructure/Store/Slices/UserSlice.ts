@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit/dist/createAction";
+import { createAction, PayloadAction } from "@reduxjs/toolkit/dist/createAction";
 import { LOGIN_MESSAGE, UserInfo } from "../../Types/User/User";
 import { RootState } from "../store";
 
-export type UserInfoState = { value: ({ users: UserInfo[] } & { isLoggedIn: boolean, message: string, messageType: LOGIN_MESSAGE }) }
+export type UserInfoState = { value: ({ users: UserInfo[] } & { isLoggedIn: boolean, message: string, messageType: LOGIN_MESSAGE, isUserLoaded: boolean }) }
 
 const initialState: UserInfoState = {
     value: {
         isLoggedIn: false,
         message: '',
         messageType: "INFO",
+        isUserLoaded: false,
         users: [
             {
                 userId: '',
@@ -28,9 +29,10 @@ const UserSlice = createSlice({
     reducers: {
         loadUsers(state: UserInfoState, action: PayloadAction<UserInfo[]>) {
             state.value.users = action.payload;
+            state.value.isUserLoaded = true;
         },
 
-        login(state: UserInfoState, action: PayloadAction<{ isLoggedIn: boolean, message: string, messageType: LOGIN_MESSAGE, userId: 'string' }>) {
+        login(state: UserInfoState, action: PayloadAction<{ isLoggedIn: boolean, message: string, messageType: LOGIN_MESSAGE, userId: string }>) {
             state.value.isLoggedIn = action.payload.isLoggedIn;
             state.value.message = action.payload.message;
             state.value.messageType = action.payload.messageType;
@@ -52,6 +54,11 @@ const UserSlice = createSlice({
         }
     }
 })
+
+export const performLogin = createAction<{userId: string, password: string}>('User/PerformLogin')
+export const addUser = createAction<{user: UserInfo}>('User/AddUser')
+export const removeUser = createAction<{userId: string}>('User/RemoveUser')
+export const editUser = createAction<{user: UserInfo}>('User/EditUser')
 
 export const {loadUsers, login, logout} = UserSlice.actions;
 export const selectUser = (state: RootState) => state.User.value;
