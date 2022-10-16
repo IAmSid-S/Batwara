@@ -36,10 +36,22 @@ bower_components
 
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
-
+jspm_packages/
 # Dependency directories
 node_modules/
-jspm_packages/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
 
 # TypeScript v1 declaration files
 typings/
