@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-community/async-storage";
-import { LOCALSTORAGE_USER_KEYS } from "../../Types/User/User";
+import { LOCALSTORAGE_USER_KEYS } from "../Types/User/User";
 
 
 export type LocalStorageConstants = LOCALSTORAGE_USER_KEYS

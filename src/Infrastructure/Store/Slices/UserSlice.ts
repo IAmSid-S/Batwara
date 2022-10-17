@@ -61,6 +61,5 @@ export const removeUser = createAction<{userId: string}>('User/RemoveUser')
 export const editUser = createAction<{user: UserInfo}>('User/EditUser')
 
 export const {loadUsers, login, logout} = UserSlice.actions;
-export const selectUser = (state: RootState) => state.User.value;
 
 export default UserSlice.reducer;

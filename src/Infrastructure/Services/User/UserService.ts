@@ -1,6 +1,6 @@
 import { UserInfo } from "../../Types/User/User";
 import { IUserService } from "./IUserService";
-import { getData, removeKey, storeData } from "./LocalStorage";
+import { getData, removeKey, storeData } from "../../Utility/LocalStorage";
 
 export class UserService implements IUserService {
     async loadUsersFromMemory(): Promise<UserInfo[]> {
