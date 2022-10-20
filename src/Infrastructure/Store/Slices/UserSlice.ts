@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createAction, PayloadAction } from "@reduxjs/toolkit/dist/createAction";
+import { createAction, PayloadAction } from "@reduxjs/toolkit";
 import { LOGIN_MESSAGE, UserInfo } from "../../Types/User/User";
 import { RootState } from "../store";
 

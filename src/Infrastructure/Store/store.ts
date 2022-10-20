@@ -1,5 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit/dist/configureStore";
-import { getDefaultMiddleware } from "@reduxjs/toolkit/dist/getDefaultMiddleware";
+import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { ServiceProvider } from "../Services/ServiceProvider";
 import { CreateMiddlewareWithServiceProvider } from "../Utility/MiddlewareFactory";
