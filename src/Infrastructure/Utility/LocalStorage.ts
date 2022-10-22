@@ -4,8 +4,8 @@ import { LOCALSTORAGE_USER_KEYS } from "../Types/User/User";
 
 
 export type LocalStorageConstants = LOCALSTORAGE_USER_KEYS
-
-
+// debugger;
+// AsyncStorage.clear();
 
 export const storeData = async (key: LocalStorageConstants, keyModifier: string, value: any): Promise<boolean> => {
     try {

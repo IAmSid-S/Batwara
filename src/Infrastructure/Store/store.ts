@@ -4,12 +4,12 @@ import { ServiceProvider } from "../Services/ServiceProvider";
 import { CreateMiddlewareWithServiceProvider } from "../Utility/MiddlewareFactory";
 import User from './Slices/UserSlice';
 
-
+const middleWareArray = CreateMiddlewareWithServiceProvider(new ServiceProvider());
 export const store = configureStore({
     reducer: {
         User
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(CreateMiddlewareWithServiceProvider(new ServiceProvider()))
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(...middleWareArray)
 });
 
 export type RootState = ReturnType<typeof store.getState>;

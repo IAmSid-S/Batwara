@@ -3,6 +3,16 @@ import { IUserService } from "./IUserService";
 import { getData, removeKey, storeData } from "../../Utility/LocalStorage";
 
 export class UserService implements IUserService {
+
+    async selectUser(userID: string): Promise<boolean> {
+        const userList = await this.loadUsersFromMemory();
+        const updatedUserList = userList.map(x => {
+            x.isSelected = x.userId === userID;
+            return x;
+        });
+        return await storeData('USERLIST', '', updatedUserList);
+    }
+
     async loadUsersFromMemory(): Promise<UserInfo[]> {
         let userIdList = await getData<string[]>('USERLIST', '');
         if (userIdList === null)
@@ -25,22 +35,22 @@ export class UserService implements IUserService {
     }
     async addUserInMemory(userInfo: UserInfo): Promise<boolean> {
         let userIDs = await getData<string[]>('USERLIST', '');
-        if(userIDs === null)
+        if (userIDs === null)
             userIDs = [];
 
-        if(userIDs?.includes(userInfo.userId)){
+        if (userIDs?.includes(userInfo.userId)) {
             return false;
         }
 
-        if(await storeData('USERLIST', '', [...userIDs, userInfo.userId])){
-            return await storeData('USERINFO', userInfo.userId, userInfo); 
+        if (await storeData('USERLIST', '', [...userIDs, userInfo.userId])) {
+            return await storeData('USERINFO', userInfo.userId, userInfo);
         }
         return false;
     }
     async removeUserFromMemory(userId: string): Promise<boolean> {
         let userList = await getData<string[]>('USERLIST', '');
 
-        if(userList === null){
+        if (userList === null) {
             return false;
         }
 
@@ -50,11 +60,11 @@ export class UserService implements IUserService {
     async verifyUser(userId: string, password: string): Promise<boolean> {
         let user = await getData<UserInfo>('USERINFO', userId);
 
-        if(user === null)
+        if (user === null)
             return false;
 
-        if(user.isPasswordProtected === false) return true;
-        
+        if (user.isPasswordProtected === false) return true;
+
         return user.password === password;
     }
 

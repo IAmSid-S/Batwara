@@ -32,13 +32,21 @@ const UserSlice = createSlice({
             state.value.isUserLoaded = true;
         },
 
+        selectUser(state: UserInfoState, action: PayloadAction<string>) {
+            state.value.users = state.value.users.map(x => {
+                x.isSelected = (x.userId === action.payload);
+                return x;
+            }
+            )
+        },
+
         login(state: UserInfoState, action: PayloadAction<{ isLoggedIn: boolean, message: string, messageType: LOGIN_MESSAGE, userId: string }>) {
             state.value.isLoggedIn = action.payload.isLoggedIn;
             state.value.message = action.payload.message;
             state.value.messageType = action.payload.messageType;
 
             state.value.users = state.value.users.map(x => {
-                x.isSelected = x.userId === action.payload.userId;
+                x.isSelected = (x.userId === action.payload.userId);
                 return x;
             }
             )
@@ -55,11 +63,11 @@ const UserSlice = createSlice({
     }
 })
 
-export const performLogin = createAction<{userId: string, password: string}>('User/PerformLogin')
-export const addUser = createAction<{user: UserInfo}>('User/AddUser')
-export const removeUser = createAction<{userId: string}>('User/RemoveUser')
-export const editUser = createAction<{user: UserInfo}>('User/EditUser')
+export const performLogin = createAction<{ userId: string, password: string }>('User/PerformLogin')
+export const addUser = createAction<{ user: UserInfo }>('User/AddUser')
+export const removeUser = createAction<{ userId: string }>('User/RemoveUser')
+export const editUser = createAction<{ user: UserInfo }>('User/EditUser')
 
-export const {loadUsers, login, logout} = UserSlice.actions;
+export const { loadUsers, login, logout, selectUser } = UserSlice.actions;
 
 export default UserSlice.reducer;
